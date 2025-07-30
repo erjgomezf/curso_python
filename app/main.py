@@ -11,7 +11,7 @@ def run():
   '''
 
   df = pd.read_csv('data.csv')
-  df = df[df['Continent'] == 'Africa']
+  df = df[df['Continent'] == 'South America']
 
   countries = df['Country'].values
   percentages = df['World Population Percentage'].values
@@ -19,7 +19,7 @@ def run():
 
   data = read_csv.read_csv('data.csv')
   country = input('Type Country => ')
-  print(country)
+  print(country)k
 
   result = utils.population_by_country(data, country)
 
