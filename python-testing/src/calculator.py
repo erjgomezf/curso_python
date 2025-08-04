@@ -1,16 +1,18 @@
 def sum(a, b):
-    """Returns the sum of two numbers."""
+    """Retorna la suma de dos números."""
     return a + b
 
 def subtract(a, b):
-    """Returns the difference of two numbers."""
+    """Retorna la resta de dos números."""
     return a - b
 
 def multiply(a, b):
-    """Returns the product of two numbers."""
+    """Retorna el producto de dos números."""
     return a * b
 
 def divide(a, b):
-    """Returns the quotient of two numbers."""
+    """Retorna la división de dos números."""
+    if b ==0:
+        raise ZeroDivisionError("No se puede dividir por cero")
     return a / b
 

@@ -1,8 +1,10 @@
+# Apuntes de asserts en Python con unittest
+
+```python
 import unittest
 SERVER = "production"
 
 class AllAssertsTest(unittest.TestCase):
-    
     # Test para verificar que se lanza una excepción específica
     def test_assert_raises(self):
         with self.assertRaises(ValueError, msg="Se esperaba un ValueError"):
@@ -110,54 +112,51 @@ class AllAssertsTest(unittest.TestCase):
     @unittest.skipUnless(SERVER=="production", "Solo se ejecuta en producción")
     def test_skip_unless(self):
         self.assertEqual("test", "test", "Esta prueba solo se ejecuta en producción")
-        
-    
-        
-        
-    ''''
-    # Hay que revisar, ya que no existen estos métodos en unittest
-    def test_assert_dict_not_equal(self):
-        self.assertDictNotEqual({"a": 1, "b": 2}, {"a": 1, "b": 3}, "Los diccionarios no son iguales")
-    
-    def test_assert_list_not_equal(self):
-        self.assertListNotEqual([1, 2, 3], [1, 2, 4], "Las listas no son iguales")
-    
-    def test_assert_set_not_equal(self):
-        self.assertSetNotEqual({1, 2, 3}, {1, 2, 4}, "Los conjuntos no son iguales")
-    
-    def test_assert_sequence_not_equal(self):
-        self.assertSequenceNotEqual((1, 2, 3), (1, 2, 4), "Las secuencias no son iguales")
-    
-    def test_assert_is_subclass(self):
-        class Base: pass
-        class Derived(Base): pass
-        self.assertIsSubclass(Derived, Base, "Derived es una subclase de Base")
-    
-    def test_assert_not_is_subclass(self):
-        class Base: pass
-        class Derived(Base): pass
-        self.assertNotIsSubclass(Derived, Base, "Derived no es una subclase de Base")
+```
 
-    def test_assert_is_not_empty(self):
-        self.assertIsNotEmpty([1, 2, 3], "La lista no está vacía")
-    
-    def test_assert_is_empty(self):
-        self.assertIsEmpty("", "La cadena está vacía")
-    
-    def test_assert_is_not_empty_dict(self):
-        self.assertIsNotEmptyDict({"key": "value"}, "El diccionario no está vacío") 
-    
-    def test_assert_is_empty_dict(self):
-        self.assertIsEmptyDict({}, "El diccionario está vacío")
-    
-    def test_assert_is_not_empty_set(self):
-        self.assertIsNotEmptySet({1, 2, 3}, "El conjunto no está vacío")
-    
-    def test_assert_is_empty_set(self):
-        self.assertIsEmptySet(set(), "El conjunto está vacío")
-    '''    
-    
-        
-        
-if __name__ == "__main__":
-    unittest.main() 
+---
+
+## Resumen de asserts útiles en unittest
+
+- `assertEqual(a, b)`: Verifica que `a == b`.
+- `assertNotEqual(a, b)`: Verifica que `a != b`.
+- `assertTrue(x)`: Verifica que `x` es verdadero.
+- `assertFalse(x)`: Verifica que `x` es falso.
+- `assertIs(a, b)`: Verifica que `a` y `b` son la misma instancia.
+- `assertIsNot(a, b)`: Verifica que `a` y `b` no son la misma instancia.
+- `assertIsNone(x)`: Verifica que `x` es `None`.
+- `assertIsNotNone(x)`: Verifica que `x` no es `None`.
+- `assertIn(a, b)`: Verifica que `a` está en `b`.
+- `assertNotIn(a, b)`: Verifica que `a` no está en `b`.
+- `assertGreater(a, b)`: Verifica que `a > b`.
+- `assertLess(a, b)`: Verifica que `a < b`.
+- `assertGreaterEqual(a, b)`: Verifica que `a >= b`.
+- `assertLessEqual(a, b)`: Verifica que `a <= b`.
+- `assertAlmostEqual(a, b, places)`: Verifica que `a` y `b` son aproximadamente iguales.
+- `assertNotAlmostEqual(a, b, places)`: Verifica que `a` y `b` no son aproximadamente iguales.
+- `assertCountEqual(a, b)`: Verifica que las listas tienen los mismos elementos, sin importar el orden.
+- `assertMultiLineEqual(a, b)`: Verifica que dos cadenas multilinea son iguales.
+- `assertRegex(a, r)`: Verifica que la cadena `a` coincide con el regex `r`.
+- `assertNotRegex(a, r)`: Verifica que la cadena `a` no coincide con el regex `r`.
+- `assertDictEqual(a, b)`: Verifica que dos diccionarios son iguales.
+- `assertListEqual(a, b)`: Verifica que dos listas son iguales.
+- `assertSetEqual(a, b)`: Verifica que dos conjuntos son iguales.
+- `assertSequenceEqual(a, b)`: Verifica que dos secuencias son iguales.
+- `assertIsInstance(a, tipo)`: Verifica que `a` es instancia de `tipo`.
+- `assertNotIsInstance(a, tipo)`: Verifica que `a` no es instancia de `tipo`.
+- `assertRaises(error)`: Verifica que se lanza una excepción.
+- Decoradores:  
+  - `@unittest.skip("razón")`
+  - `@unittest.skipIf(condición, "razón")`
+  - `@unittest.skipUnless(condición, "razón")`
+  - `@unittest.expectedFailure`
+
+---
+
+Puedes copiar este contenido a tu archivo `.md` para tus apuntes.
+
+
+
+
+
+
