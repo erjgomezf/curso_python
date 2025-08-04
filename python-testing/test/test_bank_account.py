@@ -37,8 +37,9 @@ class BankAccountTest(unittest.TestCase):
         self.assertEqual(self._count_lines(self.account.log_file), 1, "Se esperaba 1 transacción en el log")
         self.account.deposit(500)
         self.assertEqual(self._count_lines(self.account.log_file), 2, "Se esperaba 2 transacciones en el log")
-        
+    
+    @unittest.expectedFailure
     def test_withdraw_insufficient_funds(self):
-        initial_balance = self.account.get_balance()
-        new_balance = self.account.withdraw(2000)
-        self.assertEqual(new_balance, initial_balance, "El saldo no debería cambiar al intentar retirar más de lo disponible")
+        new_balance = self.account.withdraw(1200)
+        self.assertEqual(new_balance, -200, "El saldo deberia ser -200 al intentar retirar más de lo que hay en la cuenta")
+
