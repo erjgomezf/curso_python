@@ -27,11 +27,16 @@
 
 ## 5. Comandos útiles del Terminal
 
+### Entorno Virual
+
 - **Inicializar el entorno virtual:** `python -m venv env`
 - **Activar el entorno virtual (Linux/macOS):** `source env/bin/activate`
 - **Activar el entorno virtual (Windows):** `.\env\Scripts\activate`
 - **Desactivar el entorno virtual:** `deactivate`
 
+### Comandos GIT
+
+- **Inicializar un repositorio GIT:** `git init`
 - **Revisar el estatus de GIT:** `git status`
 - **Sincronizar los cambios con la nube:** `git pull`
 - **Añadir los cambios al stage:** `git add .`
@@ -45,3 +50,12 @@
 
 - **Mostrar los logs de GIT (visual):** `git log --oneline --graph --decorate --all`
 - **Mostrar las diferencias entre local y la nube:** `git log main..origin/main`
+
+### Comandos Test con unittest
+
+- **Para correr una prueba:** `python -m unittest <clase>.<modulo>`
+- **Para correr todas las pruebas:** `python -m unittest discover tests`
+- **Para correr todas las pruebas con detalle:** `python -m unittest discover -v -s tests`
+- **Para correr una suite de pruebas:** `python -m tests.test_suite`
+- **Para correr una prueba enviando un path:** `python -m unittest <carpeta>.<archivo>.<clase>.<modulo>`
+  `
