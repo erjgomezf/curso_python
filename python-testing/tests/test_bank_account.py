@@ -1,5 +1,8 @@
 import unittest, os
+from unittest.mock import patch
+from datetime import datetime
 
+from src.exceptions import withdrawTimeRestrictionsError
 from src.bank_account import BankAccount
 
 
@@ -43,3 +46,15 @@ class BankAccountTest(unittest.TestCase):
         new_balance = self.account.withdraw(1200)
         self.assertEqual(new_balance, -200, "El saldo deberia ser -200 al intentar retirar más de lo que hay en la cuenta")
 
+    @patch('src.bank_account.datetime')
+    def test_withdraw_during_business_hours(self, mock_datetime):
+        mock_datetime.now.return_value.hour = 10
+        self.account.withdraw(100)
+
+    @patch('src.bank_account.datetime')
+    def test_withdraw_outside_business_hours(self, mock_datetime):
+        mock_datetime.now.return_value.hour = 20
+        with self.assertRaises(withdrawTimeRestrictionsError):
+            self.account.withdraw(100)
+            
+#**Reto**: Implementa y prueba un metodo para que no se puedan realizar retiros en fines de semana.

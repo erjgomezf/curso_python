@@ -1,3 +1,6 @@
+from datetime import datetime
+from .exceptions import InsufficientFundsError, withdrawTimeRestrictionsError
+
 class BankAccount:
     # Inicializa la cuenta bancaria con un saldo inicial
     def __init__(self, balance=0, log_file=None):
@@ -18,6 +21,10 @@ class BankAccount:
         return self.balance
     
     def withdraw(self, amount):
+        now = datetime.now()
+        if now.hour < 9 or now.hour >= 17:
+            raise withdrawTimeRestrictionsError("Los retiros solo se permiten entre las 9:00 y las 17:00 horas.")  
+        
         if amount > 0 and self.balance >= amount:
             self.balance -= amount
             self._log_transaction(f"Retiro realizado: {amount}, nuevo saldo: {self.balance}")
@@ -56,4 +63,4 @@ if __name__ == "__main__":
     #account1.transfer(3000, account2)
     #print(f"Account 1 balance after transfer: {account1.get_balance()}")
     #print(f"Account 2 balance after transfer: {account2.get_balance()}")
-'''   
+'''
