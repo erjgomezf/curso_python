@@ -1,5 +1,5 @@
 from datetime import datetime
-from .exceptions import InsufficientFundsError, withdrawTimeRestrictionsError
+from .exceptions import withdrawTimeRestrictionsError
 
 class BankAccount:
     # Inicializa la cuenta bancaria con un saldo inicial
@@ -20,11 +20,15 @@ class BankAccount:
             self._log_transaction(f"Depósito realizado: {amount}, nuevo saldo: {self.balance}")
         return self.balance
     
-    def withdraw(self, amount):
+    def validate_schedule_for_withdraw(self):
         now = datetime.now()
-        if now.hour < 9 or now.hour >= 17:
-            raise withdrawTimeRestrictionsError("Los retiros solo se permiten entre las 9:00 y las 17:00 horas.")  
+        weekday_now = int(now.weekday())
+        if now.hour < 9 or now.hour >= 17 or weekday_now >= 5:
+            raise withdrawTimeRestrictionsError("Los retiros solo se permiten entre las 9:00 y las 17:00 horas de lunes a viernes.")
         
+        
+    def withdraw(self, amount):
+        self.validate_schedule_for_withdraw()
         if amount > 0 and self.balance >= amount:
             self.balance -= amount
             self._log_transaction(f"Retiro realizado: {amount}, nuevo saldo: {self.balance}")
