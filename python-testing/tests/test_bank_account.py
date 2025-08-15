@@ -41,7 +41,6 @@ class BankAccountTest(unittest.TestCase):
         self.account.deposit(500)
         self.assertEqual(self._count_lines(self.account.log_file), 2, "Se esperaba 2 transacciones en el log")
     
-    @unittest.expectedFailure
     def test_withdraw_raises_error_when_insufficient_funds(self):
         with self.assertRaises(InsufficientFundsError):
             self.account.withdraw(2000)
@@ -87,3 +86,24 @@ class BankAccountTest(unittest.TestCase):
                 new_balance = self.account.deposit(case["ammount"])
                 self.assertEqual(new_balance, case["expected"])
                 
+    def test_transfer_between_accounts(self):
+        account2 = BankAccount(balance=500, log_file="transactions2.txt")
+        result = self.account.transfer(300, account2)
+        self.assertTrue(result, "La transferencia debería ser exitosa")
+        self.assertEqual(self.account.get_balance(), 700, "El saldo de la cuenta 1 debería ser 700 después de la transferencia")
+        self.assertEqual(account2.get_balance(), 800, "El saldo de la cuenta 2 debería ser 800 después de la transferencia")
+        
+        # Cleanup
+        if os.path.exists("transactions2.txt"):
+            os.remove("transactions2.txt")
+    
+    def test_transfer_insufficient_funds(self):
+        account2 = BankAccount(balance=500, log_file="transactions2.txt")
+        result = self.account.transfer(1200, account2)
+        self.assertFalse(result, "La transferencia debería fallar por fondos insuficientes")
+        self.assertEqual(self.account.get_balance(), 1000, "El saldo de la cuenta 1 debería seguir siendo 1000 después de la transferencia fallida")
+        self.assertEqual(account2.get_balance(), 500, "El saldo de la cuenta 2 debería seguir siendo 500 después de la transferencia fallida")
+        
+        # Cleanup
+        if os.path.exists("transactions2.txt"):
+            os.remove("transactions2.txt")

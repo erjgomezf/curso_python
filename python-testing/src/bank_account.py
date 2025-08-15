@@ -1,5 +1,5 @@
 from datetime import datetime
-from .exceptions import withdrawTimeRestrictionsError
+from .exceptions import withdrawTimeRestrictionsError, InsufficientFundsError
 
 class BankAccount:
     # Inicializa la cuenta bancaria con un saldo inicial
@@ -33,10 +33,10 @@ class BankAccount:
             self.balance -= amount
             self._log_transaction(f"Retiro realizado: {amount}, nuevo saldo: {self.balance}")
             return self.balance
-        else:
+        elif amount > 0 and self.balance < amount:
             self._log_transaction("Saldo insuficiente para retirar")
-            print("Saldo insuficiente para retirar")
-        return self.balance
+            raise InsufficientFundsError("Saldo insuficiente para retirar")
+        
     
     def get_balance(self):
         self._log_transaction(f"Diponible en cuenta: {self.balance}")
@@ -58,13 +58,13 @@ if __name__ == "__main__":
     account1 = BankAccount(balance=1000)
     print(account1.get_balance())
     
-    #account2 = BankAccount(balance=500)
+    account2 = BankAccount(balance=500)
     
     account1.deposit(200)
     print(f"Account 1 balance after deposit: {account1.get_balance()}")
     #account1.withdraw(3000)
     
-    #account1.transfer(3000, account2)
+    account1.transfer(3000, account2)
     #print(f"Account 1 balance after transfer: {account1.get_balance()}")
     #print(f"Account 2 balance after transfer: {account2.get_balance()}")
 '''
