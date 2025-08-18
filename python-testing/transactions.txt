@@ -1,0 +1,18 @@
+Cuenta creada con saldo: 1000
+Depósito realizado: 100, nuevo saldo: 1100
+Cuenta creada con saldo: 1000
+Depósito realizado: 1300, nuevo saldo: 2300
+Cuenta creada con saldo: 1000
+Depósito realizado: 3000, nuevo saldo: 4000
+Cuenta creada con saldo: 1000
+Depósito realizado: 100, nuevo saldo: 1100
+Cuenta creada con saldo: 1000
+Depósito realizado: 1300, nuevo saldo: 2300
+Cuenta creada con saldo: 1000
+Depósito realizado: 3000, nuevo saldo: 4000
+Cuenta creada con saldo: 1000
+Depósito realizado: 100, nuevo saldo: 1100
+Cuenta creada con saldo: 1000
+Depósito realizado: 1300, nuevo saldo: 2300
+Cuenta creada con saldo: 1000
+Depósito realizado: 3000, nuevo saldo: 4000
